@@ -18,11 +18,12 @@ function SearchBar() {
     setIsSearchFilled(!!value.trim());
   };
 
-  const handleButtonClick = () => {
-    if (!isSearchFilled) {
-      setShowAlert(true);
-    }
-  };
+  const handleButtonClick = () =>
+    isSearchFilled ? null : (
+      <Alert severity="warning" sx={{ display: showAlert ? "block" : "none" }}>
+        Please enter the location first.
+      </Alert>
+    );
 
   return (
     <>
@@ -50,10 +51,10 @@ function SearchBar() {
               disabled={!isSearchFilled}
               onClick={handleButtonClick}
               sx={{
-                backgroundColor: "#4caf50",  
+                backgroundColor: "#4caf50",
                 "&.Mui-disabled": {
-                  backgroundColor: "#cccccc",  
-                  color: "#666666",  
+                  backgroundColor: "#cccccc",
+                  color: "#666666",
                 },
               }}
             >
@@ -61,12 +62,6 @@ function SearchBar() {
             </Button>{" "}
           </Link>
         </div>
-        <Alert
-          severity="warning"
-          sx={{ display: showAlert ? "block" : "none" }}
-        >
-          Please enter the location first.
-        </Alert>
       </div>
     </>
   );
